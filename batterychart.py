@@ -42,9 +42,6 @@ OY = [0]
 
 while 1:
 	bat = getpercent()
-	if bat <= batteryend:
-		print "Battery to low"
-		sys.exit()
 	if bat == '00':
 		bat = 100
 	elif bat == batteryend:
