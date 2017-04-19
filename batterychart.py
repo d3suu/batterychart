@@ -1,7 +1,6 @@
 from pylab import *
 from subprocess import check_output
 import time
-import thread
 import sys
 
 try:
@@ -30,10 +29,7 @@ def drawchart(OX, OY):
 	xlabel('Time [s]')
 	ylabel('Battery [%]')
 	plot(OX, OY)
-	print "Drawing..."
 	savefig("{}.png".format(nameoffile))
-	print "Done! Saved to {}.png".format(nameoffile)
-	sys.exit()
 	
 	
 timestart = gettime()
@@ -45,9 +41,10 @@ while 1:
 	if bat == '00':
 		bat = 100
 	elif bat == batteryend:
-		drawchart(OX, OY)
+		sys.exit()
 	timeb = gettime() - timestart
 	OX += [timeb]
 	OY += [bat]
 	print "Time: {}s | Battery: {}%".format(timeb, bat)
+	drawchart(OX, OY)
 	time.sleep(samplingtime)
